@@ -24,6 +24,7 @@ namespace EmpleoDotNet.Repository
         public List<JobOpportunity> GetRelatedJobs(int id, string name)
         {
             var relatedJobs = DbSet
+                .Include(x => x.JobOpportunityLocation)
                 .Where(
                     x =>
                         x.Id != id &&

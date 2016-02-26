@@ -1,0 +1,85 @@
+﻿@model EmpleoDotNet.ViewModel.UserProfileViewModel
+
+@{
+    ViewBag.Title = "Editando Perfil";
+}
+
+@section styles{
+    <style>
+        #company-details {
+            width: 670px;
+            height: 135px;
+        }
+    </style>
+}
+
+@section scripts{
+    <script>
+        $(document).ready(function() {
+            $('#company-logo-value').blur(function () {
+                var newSrc = $('#company-logo-value').val();
+                if (newSrc) {
+                    $('#company-logo').attr('src', newSrc);
+                } else {
+                    $('#company-logo').attr('src', '');
+                }
+            });
+        });
+    </script>
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <section id="jobs">
+        <div class="container">
+            <h2>Detalles del Perfil</h2>
+            <hr/>
+            <div class="row">
+                <div class="col-sm-4">
+                    @*<h2>Actualizando Datos del Perfil</h2>*@
+                    <div class="form-group">
+                        <label><strong>Nombre</strong></label>
+                        @Html.TextBoxFor(m => m.Name, new {@class = "form-control"})
+                        @Html.ValidationMessageFor(m => m.Name)
+                    </div>
+                    <div class="form-group">
+                        <label><strong>Email</strong></label>
+                        @Html.TextBoxFor(m => m.Email, new {@class = "form-control"})
+                        @Html.ValidationMessageFor(m => m.Email)
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label><strong>Web Site</strong></label>
+                        @Html.TextBoxFor(m => m.WebSiteUrl, new {@class = "form-control"})
+                    </div>
+                    <div class="form-group">
+                        <label><strong>Logo Url</strong></label>
+                        @Html.TextBoxFor(m => m.ImageUrl, new {@class = "form-control", id = "company-logo-value"})
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label><strong>Logo</strong></label>
+                    </div>
+                    <img alt="" id="company-logo" width="280" height="100" src="@Model.ImageUrl"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-7">
+                    <div class="form-group">
+                        <label><strong>Sobre la Compania</strong></label>
+                        @Html.TextAreaFor(m => m.Description, new {@class = "form-control", id = "company-details"})
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <hr/>
+                    <input type="submit" class="btn btn-primary" value="Guardar Cambios"/>
+                </div>
+            </div>
+        </div>
+    </section>
+}

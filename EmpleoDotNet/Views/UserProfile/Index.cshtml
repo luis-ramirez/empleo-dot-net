@@ -1,0 +1,81 @@
+﻿@model EmpleoDotNet.ViewModel.UserProfileViewModel
+
+@{
+    ViewBag.Title = Model.Name;
+}
+
+@section styles{
+    <style>
+        #profile-logo {
+            margin-top: 25px;
+        }
+
+         #profile-name {
+             font-weight: bold;
+             font-size: 30px;
+             margin-top: 20px;
+             margin-bottom: 10px;
+             color: #0c676d;
+         }
+    </style>
+}
+
+<section id="jobs">
+    <div class="container">
+        <div class="row">
+            @* Information *@
+            <div class="col-md-8 col-lg-8" style="margin-left: 50px;">
+                <div class="row">
+                    @* Name*@
+                    <div class="col-md-9 col-lg-9 pull-left">
+                        <p id="profile-name">@Model.Name</p>
+                    </div>
+                </div>
+
+                @* Details *@
+                <div class="row">
+                    <div class="col-md-12 col-lg-12">
+                        <h2>Detalles</h2>
+                        <table class="table">
+                            <thead></thead>
+                            <tbody>
+                            <tr>
+                                <td><strong>Description</strong></td>
+                                <td>@Model.Description</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Email</strong></td>
+                                <td>@Model.Email</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Web Site</strong></td>
+                                <td><a href="@Model.WebSiteUrl">@Model.WebSiteUrl</a></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <hr/>
+                <div class="row">
+                    <div class="col-md-12 col-lg-12 pull-right">
+                        <a href="@Url.Action("Edit", new { id = Model.Id })" class="btn btn-primary pull-right">Editar Detalles</a>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 col-lg-12">
+                        <br/>
+                        <h2>Empleos</h2>
+                        @Html.Partial("_JobListPartialUserProfile", Model.Jobs)
+                    </div>
+                </div>
+            </div>
+
+            @* Logo *@
+            <div class="col-md-3 col-lg-3">
+                <img id="profile-logo" src="@Model.ImageUrl" />
+            </div>
+        </div>
+    </div>
+</section>
+
